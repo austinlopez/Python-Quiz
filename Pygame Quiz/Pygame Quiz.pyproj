@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>050796ed-bbba-42d0-9065-4efca41ca540</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>QuestionReader.py</StartupFile>
+    <StartupFile>Pygame_Quiz.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

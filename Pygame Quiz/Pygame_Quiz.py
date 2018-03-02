@@ -3,6 +3,8 @@ import pygame, sys, random, time, csv, pygame.color
 from pygame.locals import *
 from threading import Timer
 
+import QuestionReader
+
 pygame.init()
 
 """
@@ -76,7 +78,7 @@ class Block():
             self.piece2 = pygame.draw.rect(screen,self.color,[self.x,self.y,self.width,self.height])
 
     def pointInBlock(self, x, y):
-        if ((self.x1 < x < (self.x1 + self.width)) & (self.y1 < y < (self.y1 + self.height))):
+        if ((self.x < x < (self.x + self.width)) & (self.y < y < (self.y + self.height))):
             print("That is in: Block ",self.name)
             return True
 
@@ -91,13 +93,24 @@ class Answers(pygame.sprite.Sprite):
 
         self.rect = Block(self.answerName, color,x,y, 300, 300,bgColor)#, [255,0,0])
 
+    def createAnswerBlock(self,answers):
+        answer1 = Block('answer1',[255,128,64],10,300,250,100,[0,0,0])
+        answer2 = Block('answer1',[255,128,0],270,300,250,100,[0,0,0])
+        answer3 = Block('answer1',[128,64,64],10,410,250,100,[0,0,0])
+        answer4 = Block('answer1',[128,0,255],270,410,250,100,[0,0,0])
+        answer1.draw(self.screen)
+        answer2.draw(self.screen)
+        answer3.draw(self.screen)
+        answer4.draw(self.screen)
+
     def draw(self):
         self.rect.draw(self.screen)
 
 
 class Question():
 
-    def __init__(self, topic, question, answers, correctAnswer):
+    def __init__(self, screen, topic, question, answers, correctAnswer):
+        self.screen = screen
         self.topic = topic
         self.question = question
         self.answers = answers
@@ -105,11 +118,49 @@ class Question():
 
         self.answerBlocks = {}
 
-    def createAnswers(self, answers):
+        #print(topic,question,answers,correctAnswer)
+
+    def createAnswers(self):
         answerNum = 0
-        for answer in answers:
-            self.answerBlocks.append()
+        for answer in self.answers:
+            if answerNum == 0:
+                self.answerBlocks[answerNum] = Answers(self.screen, answer, 10,300,250,100, [255,128,64], [0,0,0])
+            if answerNum == 1:
+                self.answerBlocks[answerNum] = Answers(self.screen, answer, 270,300,250,100, [255,128,0], [0,0,0])
+            if answerNum == 2:
+                self.answerBlocks[answerNum] = Answers(self.screen, answer, 10,410,250,100, [128,64,64], [0,0,0])
+            if answerNum == 3:
+                self.answerBlocks[answerNum] = Answers(self.screen, answer, 270,410,250,100,[128,0,255], [0,0,0])
+            #self.answerBlocks[answerNum] = Answers(self.screen, answer, 100,100,100,100,[0,0,0],[0,0,0])
+            #self.answerBlocks[answerNum].createAnswerBlock(self.answers)
+            self.answerBlocks[answerNum].draw()
+            answerNum += 1
         
+
+class Quiz():
+
+    def __init__(self, screen, source):
+        self.screen = screen
+        quiz = QuestionReader.getQuestionAndAnswers('.\data','\questions.txt')
+        self.questions = quiz[0]
+        self.answerKey = quiz[1]
+        #print(self.questions)
+        #print(self.answerKey)
+        self.answerNum = {}
+        questionNum = 0
+        for questionName in self.questions:
+            self.answerNum[questionNum] = questionName
+            questionNum += 1
+
+    def selectRandomQuestion(self):
+        self.currentQuestion = self.answerNum[random.randint(0,len(self.answerNum))]
+        print(self.currentQuestion)
+        #return self.currentQuestion
+
+    def initializeQuestion(self):
+        self.currentQuestion = Question(self.screen, 'Something', self.currentQuestion, self.questions[self.currentQuestion],self.answerKey[self.currentQuestion])
+        self.currentQuestion.createAnswers()
+
 """
     Main Game Code
 """
@@ -122,10 +173,14 @@ def main():
 
     screen.fill(BG_COLOR)
 
-    answer1 = Answers(screen,"lol idk",100,200,150,50,[0,255,255])
-    answer1.draw()
-    answer2 = Answers(screen,"another one",400,200,150,50,[0,200,200],[100,50,0])
-    answer2.draw()
+    currentQuiz = Quiz(screen, 'Question.txt')
+    currentQuiz.selectRandomQuestion()
+    currentQuiz.initializeQuestion()
+
+    #answer1 = Answers(screen,"lol idk",100,200,150,50,[0,255,255])
+    #answer1.draw()
+    #answer2 = Answers(screen,"another one",400,200,150,50,[0,200,200],[100,50,0])
+    #answer2.draw()
 
     while True:
         #screen.fill(BG_COLOR)
@@ -133,8 +188,8 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
                 print(pos)
-                answer1.rect.pointInBlock(pos[0],pos[1])
-                answer2.rect.pointInBlock(pos[0],pos[1])
+                #answer1.rect.pointInBlock(pos[0],pos[1])
+                #answer2.rect.pointInBlock(pos[0],pos[1])
 
             if event.type == pygame.QUIT:
                 pygame.quit(); sys.exit()
