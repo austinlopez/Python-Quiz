@@ -182,14 +182,27 @@ class Question():
             answerNum += 1
 
     def drawAll(self):
-        text_to_screen(self.screen,self.question,100,100)
+        text_to_screen(self.screen,self.question,(WINDOW_SIZE[0]/2),100)
         for answers in self.answerBlocks:
             self.answerBlocks[answers].draw(self.screen)
 
     def whichOneClicked(self,x,y):
         for answer in self.answerBlocks:
             if self.answerBlocks[answer].rect.pointInBlock(x,y):
+                self.thisQTimer.cancel()
                 return answer
+
+    def addSec(self):
+        self.timeTaken += 1
+        self.time()
+
+    def getT(self):
+        return self.timeTaken
+
+    def time(self):
+        self.thisQTimer = Timer(1,self.addSec)
+        self.thisQTimer.start()
+
 
         
 
@@ -226,6 +239,7 @@ class Quiz():
         self.answeredWrong = []
         self.wrongNum = 0
         self.whatQ = 0
+        self.score = 0
 
         self.totalQuestions = len(self.questions)
         #print(self.totalQuestions)
@@ -281,7 +295,8 @@ class Quiz():
         self.currentQuestion = Question(self.screen, 'Something', self.currentQuestion, self.questions[self.currentQuestion],self.answerKey[self.currentQuestion])
         self.currentQuestion.createAnswers()
         self.currentQuestion.drawAll()
-        text_to_screen(self.screen,self.currentQuestion.question,100,100)
+        self.currentQuestion.time()
+        text_to_screen(self.screen,self.currentQuestion.question,(WINDOW_SIZE[0]/2),100)
 
     def checkIfCorrect(self,answered):
         """
@@ -298,6 +313,8 @@ class Quiz():
             self.answeredCorrect.append(self.answerKey[self.currentQuestion.question])
             self.answerNum.pop(self.currentChoice)
             self.correctNum += 1
+            thisScore = 100 - (self.currentQuestion.getT()*5)
+            self.score += thisScore
             playSound("\correctPing.mp3")
         if int(answered) != int(self.currentQuestion.correctAnswer):
             #print("You answered it wrong")
@@ -353,6 +370,7 @@ def main():
         if currentQuiz.currentStateOfQuiz == "question":
             text_to_screen(currentQuiz.screen,"Time Taken: {0} seconds".format(currentQuiz.currentQuestion.timeTaken),600,15,20,OSWALD_FONT, [30,30,30])
             text_to_screen(currentQuiz.screen,"Answered Correctly: {0}  Answered Wrong: {1}".format(currentQuiz.correctNum,currentQuiz.wrongNum), 200,15,20,OSWALD_FONT,[30,30,30])
+            text_to_screen(currentQuiz.screen,"Score: {0}.".format(currentQuiz.score), 100,35,20,OSWALD_FONT,[30,30,30])
             currentQuiz.currentQuestion.drawAll()
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -369,7 +387,8 @@ def main():
         if currentQuiz.currentStateOfQuiz == "finished":
             text_to_screen(currentQuiz.screen,"Congrats!", WINDOW_SIZE[0]/2,100,50,SANS_FONT,[30,30,30])
             text_to_screen(currentQuiz.screen,"You Answered {0} Correct".format(currentQuiz.correctNum), WINDOW_SIZE[0]/2,200,50,SANS_FONT,[30,30,30])
-            text_to_screen(currentQuiz.screen,"You Answered {0} Wrong".format(currentQuiz.wrongNum), WINDOW_SIZE[0]/2,300,50,SANS_FONT,[30,30,30])
+            text_to_screen(currentQuiz.screen,"You Got {0} Wrong".format(currentQuiz.wrongNum), WINDOW_SIZE[0]/2,300,50,SANS_FONT,[30,30,30])
+            text_to_screen(currentQuiz.screen,"You Got a Total Score of: {0}.".format(currentQuiz.score), WINDOW_SIZE[0]/2,400,50,SANS_FONT,[30,30,30])
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     #playSound("\Menu Select.mp3")

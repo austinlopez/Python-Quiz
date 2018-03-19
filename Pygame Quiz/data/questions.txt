@@ -1,15 +1,15 @@
-"Question 1":Answer 1,Answer 2,Answer 3,Answer 4:1
-"Question 2":Answer 1,Answer 2,Answer 3,Answer 4:2
-"Question 3":Answer 1,Answer 2,Answer 3,Answer 4:3
-"Question 4":Answer 1,Answer 2,Answer 3,Answer 4:4
-"Question 5":Answer 1,Answer 2,Answer 3,Answer 4:1
-"Question 6":Answer 1,Answer 2,Answer 3,Answer 4:2
-"Question 7":Answer 1,Answer 2,Answer 3,Answer 4:3
-"Question 8":Answer 1,Answer 2,Answer 3,Answer 4:4
-"Question 9":Answer 1,Answer 2,Answer 3,Answer 4:1
-"Question 10":Answer 1,Answer 2,Answer 3,Answer 4:2
-"Question 11":Answer 1,Answer 2,Answer 3,Answer 4:3
-"Question 12":Answer 1,Answer 2,Answer 3,Answer 4:4
-"Question 13":Answer 1,Answer 2,Answer 3,Answer 4:1
-"Question 14":Answer 1,Answer 2,Answer 3,Answer 4:2
-"Question 15":Answer 1,Answer 2,Answer 3,Answer 4:3
+"What is 2 + 2?":3 and a half,4,5,Unknown:2
+"What color is the sky?":Orange,Black,Yellow,Blue:4
+"How much water is there on Earth?":50%,100%,75%,30%:3
+"What is 5 * 0 + 1":0,6,5,1:4
+"What planet are we on?":Venus,Mercury,Mars,Earth:4
+"What is 3 * (6 + 1)":19,21,24,16:2
+"What color is grass?":Orange,Yellow,Brown,Green:3
+"Who was the first president?":George Hamilton,Abraham Lincoln,Steve Jobs,George Washington:4
+"Who created Apple":Steve Jobs,Steve Bobs,Bill Gates,Jack Black:1
+"Who created Microsoft?":Melinda Gates,Bill Gates,Stevey Wonder,Bob Saggette:2
+"Who wrote the book 1984":Morgan Freeman,Goergey Orwelley,George Orwell,Morgan Beeman:3
+"What is 3*3":7,6,9,2:3
+"What is the radius of the moon.":2159 Miles,1000 Miles,1079 Miles,30598 Meters:3
+"What is the diameter of the sun.":10000 Miles,864575 Miles,5000 Miles,1 Km:2
+"Who Created SpaceX":Elongated Musket,Musky Boi,Elon Musk,Morgan Freeman:3
