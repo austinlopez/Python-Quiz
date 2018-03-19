@@ -1,0 +1,2 @@
+
+A score was achieved of {0} out of the total {1} number of questions.

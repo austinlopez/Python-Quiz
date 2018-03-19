@@ -29,9 +29,30 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
+    <Folder Include="Fonts\" />
+    <Folder Include="Fonts\Open_Sans_Condensed\" />
+    <Folder Include="Fonts\Oswald\" />
+    <Folder Include="Sounds\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\EmailText.txt">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="data\questions.txt" />
+    <Content Include="Fonts\Open_Sans_Condensed\LICENSE.txt" />
+    <Content Include="Fonts\Open_Sans_Condensed\OpenSansCondensed-Bold.ttf" />
+    <Content Include="Fonts\Open_Sans_Condensed\OpenSansCondensed-Light.ttf" />
+    <Content Include="Fonts\Open_Sans_Condensed\OpenSansCondensed-LightItalic.ttf" />
+    <Content Include="Fonts\Oswald\OFL.txt" />
+    <Content Include="Fonts\Oswald\Oswald-Bold.ttf" />
+    <Content Include="Fonts\Oswald\Oswald-ExtraLight.ttf" />
+    <Content Include="Fonts\Oswald\Oswald-Light.ttf" />
+    <Content Include="Fonts\Oswald\Oswald-Medium.ttf" />
+    <Content Include="Fonts\Oswald\Oswald-Regular.ttf" />
+    <Content Include="Fonts\Oswald\Oswald-SemiBold.ttf" />
+    <Content Include="Sounds\correctPing.mp3" />
+    <Content Include="Sounds\Menu Select.mp3" />
+    <Content Include="Sounds\wrongPing.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
